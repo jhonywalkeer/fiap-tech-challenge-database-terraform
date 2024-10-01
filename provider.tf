@@ -3,15 +3,19 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
-      region  = var.aws_region
     }
   }
 
   backend "s3" {
-    bucket = var.s3_bucket_name
+    bucket = "fiap-tech-challenge-terraform-state"
     key    = "terraform.tfstate"
-    region = var.aws_region
+    region = "us-east-1"
   }
 
   required_version = ">= 1.0.1"
+}
+
+provider "aws" {
+  region = "us-east-1"
+  profile = "default"
 }
